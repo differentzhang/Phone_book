@@ -17,12 +17,14 @@ public class Menu {
         while (true){
             //显示菜单
             System.out.println("*********************");
-            System.out.println("**    1　添加纪录  　**");
-            System.out.println("**    2　查找纪录  　**");
-            System.out.println("**    3　修改纪录  　**");
-            System.out.println("**    4　删除纪录  　**");
-            System.out.println("**    5　排序纪录  　**");
-            System.out.println("**    6　退出系统  　**");
+            System.out.println("**    1　添加纪录   　**");
+            System.out.println("**    2　查找纪录   　**");
+            System.out.println("**    3　修改纪录   　**");
+            System.out.println("**    4　删除纪录   　**");
+            System.out.println("**    5　排序纪录  　 **");
+            System.out.println("**    6　退出系统  　 **");
+            System.out.println("**    7　存档      　**");
+            System.out.println("**    8　读档  　    **");
             System.out.println("*********************");
             System.out.println("请输入正确的数字，最小是:1　最大是:6");
 
@@ -53,6 +55,14 @@ public class Menu {
                 case "6":
                     //退出系统
                     System.exit(0);
+                    break;
+                case "7":
+                    //存档
+                    o.saveFile();
+                    break;
+                case "8":
+                    //读档
+                    o.readFile();
                     break;
                 default:
                     System.out.println("输入有误，请重新输入");

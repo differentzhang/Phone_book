@@ -1,5 +1,6 @@
 package com.love;
 
+import java.io.*;
 import java.util.*;
 
 //业务处理类
@@ -7,10 +8,7 @@ public class Operate {
 
     private static ArrayList<Person> list = new ArrayList<>();
     static Menu menu = new Menu();
-    //TelNoteRegex t = new TelNoteRegex();
 
-    // 感觉操作这里应该弄一个Person()
-    //Person p1 = new Person();
 
     Scanner sc = new Scanner(System.in);
 
@@ -56,7 +54,7 @@ public class Operate {
 
     }
 
-    //用户查询信息业务逻辑控制
+   /* //用户查询信息业务逻辑控制
     public void searchLogic(){
 
     }
@@ -79,7 +77,7 @@ public class Operate {
     //添加新用户信息
     public void addOperation(){
 
-    }
+    }*/
 
     //查询全部用户信息
     public void showAll(){
@@ -304,6 +302,61 @@ public class Operate {
         System.out.println("成功删除全部记录!");
     }
 
+    //IO 写入文件 全覆盖
+    public  void saveFile(){
+
+        FileWriter fw =null;
+        try {
+            fw = new FileWriter("homework/src/com/love/file1");
+            for (Person p : list){
+                fw.append(p.getName() + " ");
+                fw.append(p.getAge() + " ");
+                fw.append(p.getSex() + " ");
+                fw.append(p.getTelNum() + " ");
+                fw.append(p.getAddress() + " " + "\n");
+            }
+            fw.flush();
+        }catch (Exception e){
+            System.out.println("保存失败！异常信息："+e.getMessage());
+        }finally {
+            try {
+                if (fw!=null){
+                    fw.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //IO 读取文件 全覆盖
+    public  void readFile(){
+
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("homework/src/com/love/file1"));
+            String len;
+            while ((len=br.readLine())!=null){
+                String[] len1 = len.trim().split(" ");
+                Person p = new Person(len1.length, len1[0],len1[1],len1[2],len1[3],len1[4]);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br!=null){
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
     //按用户姓名排序信息
     public void orderName(){
         Collections.sort(list,new NameComparator());
@@ -352,9 +405,9 @@ class AgeComparator implements Comparator<Person>{
         //String已经实现了compareTo比较器
         //age我感觉有点问题，应该是int类型的，但是这里是String的
         //这个问题写会再说
+        //他这都用String类了,应该是防止类型报错
 
         //包装成Integer对象
         return Integer.valueOf(o1.getAge()).compareTo(Integer.valueOf(o2.getAge()));
     }
 }
-
