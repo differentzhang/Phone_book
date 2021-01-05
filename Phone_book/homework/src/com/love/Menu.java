@@ -127,7 +127,7 @@ public class Menu {
                     break;
                 case "2":
                    //按年龄查找
-                    System.out.println("输入年龄,1-100+");
+                    System.out.println("输入年龄,1-120");
                     String age = sc.nextLine();
                     o.searchByAge(age);
                     break;
@@ -139,7 +139,7 @@ public class Menu {
                     break;
                 case "4":
                     //按号码查找
-                    System.out.println("输入电话号码,6-10位数字");
+                    System.out.println("输入电话号码,11位数字,国内手机号");
                     String telNum = sc.nextLine();
                     o.searchByTelNum(telNum);
                     break;

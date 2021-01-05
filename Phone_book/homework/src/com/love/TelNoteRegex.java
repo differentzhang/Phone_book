@@ -1,116 +1,139 @@
 package com.love;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //用户输入验证类
 public class TelNoteRegex {
 
-
-
-    //写一个判断字符串都是字母的方法
-    public static boolean isLetter(String str){
-        boolean flag = true;
-
-        char[] chs = str.toCharArray();
-        for (int i = 0; i < chs.length; i++) {
-            char s =chs[i];
-            if (!Character.isLetter(s)){
-                flag = false;
-            }
-        }
-        return flag;
-    }
     //写一个判断字符串都是数字的方法
     public static boolean isNum(String str){
-        boolean flag = true;
-        char[] chs = str.toCharArray();
-        for (int i = 0; i < chs.length; i++) {
-            char s =chs[i];
-            if (!Character.isDigit(s)){
-                flag = false;
-            }
-        }
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
+        //表达式对象
+        p = Pattern.compile("\\d+");
+        //匹配一个数字
+        //创建Matcher对象
+        m = p.matcher(str);
+        flag = m.matches();
+
         return flag;
-    }
-
-    //对菜单输入选项的验证
-    public void menuRegex (int min, int max ){
-
     }
 
     //对用户输入姓名的验证  我感觉设置成一个静态的比较好点
     public static String nameRegex (String name){
-        //这里想用正则表达式弄，
-        // 先用普通思路弄，优化的时候用正则表达式弄
-
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
         while (true){
-            if (name.length()>=1 && name.length()<=10){ //1-10位
-                if (isLetter(name)){ //是否都是字母
-                    break;
-                }
+            //表达式对象
+            p = Pattern.compile("[a-zA-Z]{1,10}?");
+            //1-10个字母
+            //创建Matcher对象
+            m = p.matcher(name);
+            flag = m.matches();
+            if (flag == false){
+                System.out.println("姓名不合法,请重新输入。");
+                Scanner sc = new Scanner(System.in);
+                name = sc.next();
+            } else {
+                break;
             }
-            System.out.println("姓名不合法,请重新输入。");
-            Scanner sc = new Scanner(System.in);
-            name = sc.next();
-
         }
         return name;
     }
 
     //对用户输入年龄的验证
     public static String ageRegex (String age){
-        //这里面如果一直输入不对呢，所以得while循环
 
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
         while (true){
-            if (isNum(age) && Integer.parseInt(age)>=1 && Integer.parseInt(age)<=130){
+            //表达式对象
+            p = Pattern.compile("^(?:[1-9][0-9]?|1[01][0-9]|120)$");
+            //1-120岁
+            //创建Matcher对象
+            m = p.matcher(age);
+            flag = m.matches();
+            if (flag == false){
+                System.out.println("年龄不合法,请重新输入。");
+                Scanner sc = new Scanner(System.in);
+                age = sc.next();
+            } else {
                 break;
             }
-            System.out.println("年龄不合法,请重新输入。");
-            Scanner sc = new Scanner(System.in);
-            age = sc.next();
         }
         return age;
     }
 
     //对用户输入性别的验证
     public static String sexRegex (String sex){
-
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
         while (true){
-            if ("m".equals(sex) || "f".equals(sex) || "M".equals(sex) || "F".equals(sex)){
+            //表达式对象
+            p = Pattern.compile("m|f|M|F");
+
+            //创建Matcher对象
+            m = p.matcher(sex);
+            flag = m.matches();
+            if (flag == false){
+                System.out.println("性别不合法,请重新输入。");
+                Scanner sc = new Scanner(System.in);
+                sex = sc.next();
+            } else {
                 break;
             }
-            System.out.println("性别不合法,请重新输入。");
-            Scanner sc = new Scanner(System.in);
-            sex = sc.next();
         }
         return sex;
     }
 
     //对用户输入电话号码的验证
     public static String telNumRegex (String telNum){
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
         while (true){
-            if (isNum(telNum) && telNum.length()>=6 && telNum.length()<=10){
+            //表达式对象
+            p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");
+            //1开头,第二位是3或4或5或7或8,第三位到第11位(9个数)是0-9任意一个数字
+            //创建Matcher对象
+            m = p.matcher(telNum);
+            flag = m.matches();
+            if (flag == false){
+                System.out.println("电话号码不合法,请重新输入。");
+                Scanner sc = new Scanner(System.in);
+                telNum = sc.next();
+            } else {
                 break;
             }
-            System.out.println("电话号码不合法,请重新输入。");
-            Scanner sc = new Scanner(System.in);
-            telNum = sc.next();
         }
         return telNum;
     }
 
     //对用户输入地址的验证
     public static String addressRegex (String address){
+        boolean flag = false;
+        Pattern p = null;
+        Matcher m = null;
         while (true){
-            if (address.length()>=1 && address.length()<=50){
-                //1-50位字母或数字
-                if (isNum(address) || isLetter(address)){
-                    break;
-                }
+            //表达式对象
+            p = Pattern.compile("[a-zA-Z]{1,50}|[0-9]{1,50}");
+            //1-50位字母或数字
+            //创建Matcher对象
+            m = p.matcher(address);
+            flag = m.matches();
+            if (flag == false){
+                System.out.println("地址不合法,请重新输入。");
+                Scanner sc = new Scanner(System.in);
+                address = sc.next();
+            } else {
+                break;
             }
-            System.out.println("地址不合法,请重新输入。");
-            Scanner sc = new Scanner(System.in);
-            address = sc.next();
         }
         return address;
     }

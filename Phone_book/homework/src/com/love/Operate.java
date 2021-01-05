@@ -22,7 +22,7 @@ public class Operate {
 
 
         //输入年龄
-        System.out.println("输入年龄,1-100+");
+        System.out.println("输入年龄,1-120");
         String age = sc.nextLine();
         String new_age = TelNoteRegex.ageRegex(age);
 
@@ -34,7 +34,7 @@ public class Operate {
 
 
         //输入电话号码
-        System.out.println("输入电话号码,6-10位数字");
+        System.out.println("输入电话号码,11位数字,国内手机号");
         String telNum = sc.nextLine();
         String new_telNum = TelNoteRegex.telNumRegex(telNum);
 
@@ -53,31 +53,6 @@ public class Operate {
         }
 
     }
-
-   /* //用户查询信息业务逻辑控制
-    public void searchLogic(){
-
-    }
-
-    //修改信息业务逻辑控制
-    public void modifyLogicLogic(){
-
-    }
-
-    //删除信息业务逻辑控制
-    public void deleteLogic(){
-
-    }
-
-    // 排序信息业务逻辑控制
-    public void orderLogic(){
-
-    }
-
-    //添加新用户信息
-    public void addOperation(){
-
-    }*/
 
     //查询全部用户信息
     public void showAll(){
