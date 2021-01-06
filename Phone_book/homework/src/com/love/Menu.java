@@ -85,7 +85,6 @@ public class Menu {
             switch (select){
                 case "1":
                     o.addLogic();
-                    System.out.println("添加成功!");
                     break;
                 case "2":
                     //查看全记录
@@ -133,7 +132,7 @@ public class Menu {
                     break;
                 case "3":
                    //按性别查找
-                    System.out.println("输入性别,(男 m or M)(女 f or F)");
+                    System.out.println("输入性别,(男 m)(女 f)");
                     String sex = sc.nextLine();
                     o.searchBySex(sex);
                     break;

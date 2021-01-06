@@ -76,7 +76,7 @@ public class TelNoteRegex {
         Matcher m = null;
         while (true){
             //表达式对象
-            p = Pattern.compile("m|f|M|F");
+            p = Pattern.compile("m|f");
 
             //创建Matcher对象
             m = p.matcher(sex);

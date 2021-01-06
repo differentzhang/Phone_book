@@ -28,7 +28,7 @@ public class Operate {
 
 
         //输入性别
-        System.out.println("输入性别,(男 m or M)(女 f or F)");
+        System.out.println("输入性别,(男 m)(女 f)");
         String sex = sc.nextLine();
         String new_sex = TelNoteRegex.sexRegex(sex);
 
@@ -43,13 +43,22 @@ public class Operate {
         System.out.println("输入地址,1-50位字母或数字");
         String address = sc.nextLine();
         String new_address = TelNoteRegex.addressRegex(address);
-        Person p1 = new Person(list.size()+1, new_name,new_age,new_sex,new_telNum,new_address);
+        Person p1 = new Person(new_name,new_age,new_sex,new_telNum,new_address);
 
         //判断添加重复人
-        if (list.contains(p1)){
-            System.out.println("您当前添加的人重复了");
+        boolean isContains = false;
+        for (Person person : list){
+            if (person.getName().equals(new_name) || person.getAge().equals(new_age) || person.getSex().equals(new_sex)
+                 || person.getTelNum().equals(new_telNum) || person.getAddress().equals(new_address)){
+                isContains = true;
+                break;
+            }
+        }
+        if (isContains){
+            System.out.println("添加失败,您本次添加的新用户已经添加过了.");
         } else {
             list.add(p1);
+            System.out.println("添加成功!");
         }
 
     }
@@ -77,14 +86,12 @@ public class Operate {
         for ( i=0 ; i < list.size(); i++) {
             cur = list.get(i);
             if (cur.getName().equals(name)){
+                System.out.println("序号 "+(i+1)+"#"+cur);
                 flag = true;
-                break;
             }
         }
-        if (flag){
-            //找到了
-            System.out.println("序号 "+(i+1)+"#"+cur);
-        } else {
+        if (!flag){
+            //没找到
             System.out.println("很抱歉,没有找到!");
         }
     }
@@ -97,14 +104,12 @@ public class Operate {
         for ( i=0 ; i < list.size(); i++) {
             cur = list.get(i);
             if (cur.getAge().equals(age)){
+                System.out.println("序号 "+(i+1)+"#"+cur);
                 flag = true;
-                break;
             }
         }
-        if (flag){
-            //找到了
-            System.out.println("序号 "+(i+1)+"#"+cur);
-        } else {
+        if (!flag){
+            //没找到
             System.out.println("很抱歉,没有找到!");
         }
     }
@@ -117,14 +122,12 @@ public class Operate {
         for ( i=0 ; i < list.size(); i++) {
             cur = list.get(i);
             if (cur.getSex().equals(sex)){
+                System.out.println("序号 "+(i+1)+"#"+cur);
                 flag = true;
-                break;
             }
         }
-        if (flag){
-            //找到了
-            System.out.println("序号 "+(i+1)+"#"+cur);
-        } else {
+        if (!flag){
+            //没找到
             System.out.println("很抱歉,没有找到!");
         }
     }
@@ -137,14 +140,12 @@ public class Operate {
         for ( i=0 ; i < list.size(); i++) {
             cur = list.get(i);
             if (cur.getTelNum().equals(telNum)){
+                System.out.println("序号 "+(i+1)+"#"+cur);
                 flag = true;
-                break;
             }
         }
-        if (flag){
-            //找到了
-            System.out.println("序号 "+(i+1)+"#"+cur);
-        } else {
+        if (!flag){
+            //没找到
             System.out.println("很抱歉,没有找到!");
         }
     }
@@ -157,14 +158,12 @@ public class Operate {
         for ( i=0 ; i < list.size(); i++) {
             cur = list.get(i);
             if (cur.getAddress().equals(address)){
+                System.out.println("序号 "+(i+1)+"#"+cur);
                 flag = true;
-                break;
             }
         }
-        if (flag){
-            //找到了
-            System.out.println("序号 "+(i+1)+"#"+cur);
-        } else {
+        if (!flag){
+            //没找到
             System.out.println("很抱歉,没有找到!");
         }
     }
@@ -195,6 +194,7 @@ public class Operate {
 
     }
 
+    //修改姓名
     public void editName(String ID){
         System.out.println("请输入新的姓名.");
         String new_name = sc.nextLine();
@@ -313,7 +313,7 @@ public class Operate {
             String len;
             while ((len=br.readLine())!=null){
                 String[] len1 = len.trim().split(" ");
-                Person p = new Person(len1.length, len1[0],len1[1],len1[2],len1[3],len1[4]);
+                Person p = new Person(len1[0],len1[1],len1[2],len1[3],len1[4]);
                 list.add(p);
             }
         } catch (Exception e) {
